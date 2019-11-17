@@ -1,0 +1,39 @@
+body {
+    padding-top: 500px;
+}
+p {
+    margin: 0;
+    padding: 10px;
+}
+.contents {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+    overflow: hidden;
+}
+
+.container {
+    position: relative;
+    left: -100%;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 500px;
+    font-size: 50px;
+    transition-duration: .5s;
+    background-color: #ddd;
+    &.is-active {
+        left: 0;
+    }
+    &:nth-of-type(even) {
+        left: auto;
+        right: -90%;
+        background-color: #fff;
+        &:hover {
+            right: 0;
+        }
+    }
+    
+}
