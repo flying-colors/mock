@@ -1,0 +1,11 @@
+.btn-app {
+    width: 100%;
+    margin-top: 50px;
+    padding: 10px;
+    color: #fff;
+    background-color: rgb(73, 205, 245);
+    border: none;
+    &.is-disabled {
+        background-color: #ccc;
+    }
+}
