@@ -1,32 +1,31 @@
 (function () {
     "use strict";
     let posData = [];
-    const generatePosData = () => {
-        let $containerList = document.querySelectorAll('.js-container');        
-        $containerList = Array.from($containerList);
-        $containerList.forEach((elm,index)=>{
+    const $containerList = document.querySelectorAll('.js-container'),
+    $bnrList = document.querySelectorAll('.js-bnr');
 
+    const generatePosData = () => {       
+        const $nodeContainer = Array.from($containerList);
+        $nodeContainer.forEach((elm,index)=>{
             if (!posData[index]) {
 				posData[index] = {};
             }
-            
-            const containerTop = $containerList[index].offsetTop;
+            const containerTop = $nodeContainer[index].offsetTop;
             posData[index].containerTop = containerTop;
         });
-        console.log(posData);
         return posData;
     };
-
+    
     generatePosData();
 
-    const $container = document.querySelector('.js-container');
-
     window.addEventListener('scroll', ()=>{
-
-        if (window.pageYOffset > 300) {
-            $container.classList.add('is-active');
-        } else {
-            $container.classList.remove('is-active');
-        }
+        $containerList.forEach((elm,index) =>{
+            if (window.pageYOffset > posData[index].containerTop - 100) {
+                $containerList[index].classList.add('is-active');
+                setTimeout(() => {
+                    $bnrList[index].classList.add('is-active');
+                }, 1000);
+            }
+        });
     });
 })();
