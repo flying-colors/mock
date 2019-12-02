@@ -1,8 +1,8 @@
 (function () {
     "use strict";
-    let posData = [];
-    const $containerList = document.querySelectorAll('.js-container'),
-    $bnrList = document.querySelectorAll('.js-bnr');
+    const posData = [],
+          $containerList = document.querySelectorAll('.js-container'),
+          $bnrList = document.querySelectorAll('.js-bnr');
 
     const generatePosData = () => {       
         const $nodeContainer = Array.from($containerList);
@@ -22,9 +22,11 @@
         $containerList.forEach((elm,index) =>{
             if (window.pageYOffset > posData[index].containerTop - 100) {
                 $containerList[index].classList.add('is-active');
+                if($containerList[index].children[1] !== undefined)
                 setTimeout(() => {
-                    $bnrList[index].classList.add('is-active');
+                    $containerList[index].children[1].classList.add('is-active');
                 }, 1000);
+
             }
         });
     });
