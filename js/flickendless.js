@@ -1,9 +1,22 @@
 $(function () {
     "use strict";
-    $('#verticaly').flickEndless({
-        vertical:true,
-        onPageChange: function(e) {
-            $('input[name="num"]').val(this.page + 1);
-        }
+    $('#verticaly1-1').flickEndless({
+        vertical:true
     });
+
+    $('#verticaly1-2').flickEndless({
+        vertical:true
+    });
+
+    $('#verticaly1-3').flickEndless({
+        vertical:true
+    });
+
+    const $quickpick = $('.js-quickpick');
+    const $cover = $('.js-cover');
+
+    $quickpick.on('change', function(){        
+        $(this).closest('div').prev('div').children($cover).toggleClass('is-quickpick');
+    });
+    
 });
