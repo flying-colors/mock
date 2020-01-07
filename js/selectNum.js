@@ -1,5 +1,5 @@
 $(function(){
-	var takarakuji = takarakuji || {};
+	// 要素を取得
 	var $selectBtn = $('.js-selectBtn');
 	var $purchanseBtn = $('.js-btnPurchase');
 	var $resetBtn = $('.js-btnReset');
@@ -17,12 +17,6 @@ $(function(){
 		}
 	}
 
-	// 選択した数字を追加
-	function addSelectedNum(selectedNum) {
-		var obj = `<span id=${selectedNum} class="selectedNum__num">${selectedNum}</span>`;
-		$('.selectedNum').append(obj);
-	}
-
 	// 選択した数字を削除
 	function removeSelectedNum(_self,selectedNum) {		
 		var $addedNum = $("#"+ selectedNum);
@@ -34,6 +28,11 @@ $(function(){
 		$selectBtn.removeClass('is-select');
 		$addedNum.text('').removeClass('is-added');
 		count = 0;
+	}
+
+	// 選択した数字を管理
+	function addedNum(selectNum) {
+		$addedNum.eq(count).addClass('is-added').text(selectNum);
 	}
 
 	// 数字ボタンで選択
@@ -49,26 +48,15 @@ $(function(){
 		 
 		activateBtn();
 		addedNum(selectedNum);
-		// addSelectedNum(selectedNum);
 		count++;
-		console.log(count);
-		
 		return false;
 	});
-
-	// 選択した数字を管理
-	function addedNum(selectNum) {
-		$addedNum.eq(count).addClass('is-added').text(selectNum);
-	}
-	
-	// addedNum();
 	
 	// 選択解除
 	$resetBtn.on('click', function(){
 		activateBtn();
 		resetSelectNum();
 	});
-
 
 	$('.js-tr').on('click', function(){
 		$(this).toggleClass('is-select');
