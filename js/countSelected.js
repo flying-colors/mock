@@ -82,6 +82,6 @@ register: function(data, $target) {
         $target.removeClass('is-random');
     }
 
-    var count = that.$numbersWrap.find(`[data-mykey=${currentSet}]`).find('.js-n.is-selected').length;
-    that.$numbersWrap.find(`[data-mykey=${currentSet}]`).find('.js-remain').text(7 - count);
+    var count = that.$numbersWrap.find('[data-mykey=' + currentSet + ']').find('.js-n.is-selected').length;
+    that.$numbersWrap.find('[data-mykey=' + currentSet + ']').find('.js-remain').text(7 - count);
 },
