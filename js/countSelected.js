@@ -18,7 +18,10 @@ getHTML: function () {
 		}
 	});
 	str += '</tr></tbody></table>';
+	// 追加ここから
 	str += '<div class="js-remain" style="position: absolute; bottom: 0;right: 0; padding: 10px;border: 1px solid #000; background:#fff;">aaaaaaaaa</div>';
+	// 追加ここまで
+	str += '<div class="js-quickpic number-main-quickpic">'
 	str += '<div class="js-quickpic number-main-quickpic">';
 	str += '<h2 class="number-main-quickpic-title">クイックピック選択中</h2>';
 	str += '<p class="number-main-quickpic-text">数字は購入してからのお楽しみ</p>';
@@ -47,10 +50,14 @@ that.$render.find('.js-numbers').each(function() {
 	})) {
 	// autoだったら
 	$(this).find('.js-quickpic').addClass('is-on');
+	// 追加ここから
 	$(this).find('.js-remain').hide();
+	// 追加ここまで
     } else {
 	$(this).find('.js-quickpic').removeClass('is-on');
+	// 追加ここから
 	$(this).find('.js-remain').show();
+	// 追加ここまで
     }
 });
 
@@ -59,8 +66,9 @@ that.$render.find('.js-numbers').each(function() {
 register: function(data, $target) {
     var that = this;
     var myNumbers = that.panels()[that.currentSet()].input[data.group].numbers;
+// 追加ここから
     var currentSet = that.panels()[that.currentSet()].input[data.group].name.toLowerCase();
-
+// 追加ここまで
     // numberが空のvalueのもの
     var isRegistered = that._isRegistered(myNumbers, data.number);
     var emptyIndex = that._getEmptyNumberIndex(myNumbers);
@@ -81,7 +89,8 @@ register: function(data, $target) {
         $target.removeClass('is-selected');
         $target.removeClass('is-random');
     }
-
+// 追加ここから
     var count = that.$numbersWrap.find('[data-mykey=' + currentSet + ']').find('.js-n.is-selected').length;
     that.$numbersWrap.find('[data-mykey=' + currentSet + ']').find('.js-remain').text(7 - count);
+// 追加ここまで
 },
