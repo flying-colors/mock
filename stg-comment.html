@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>配信設定コメント生成ツール</title>
+  <!-- <link rel="stylesheet" href="./css/style.css"> -->
+  <style>
+    .app .app__inner {
+      width: 900px;
+      height: 400px;
+      margin: 0 auto;
+      padding: 50px 0;
+    }
+    .app .app__textArea {
+      box-sizing: border-box;
+      width: 100%;
+      height: 100%;
+      margin-bottom: 24px;
+      padding: 20px;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <div class="app__inner">
+      <textarea class="app__textArea js-textarea" placeholder="ここにパスを貼り付けてください。※ファイル数にカウントされてしまうため、空行は削除してください。"></textarea>
+      <textarea class="app__textArea js-output"></textarea>
+    </div>
+  </div>
+  <script>
+    (function () {
+      "use strict";
+      var $textarea = document.querySelector('.js-textarea'),
+          $output = document.querySelector('.js-output'),
+          urlStg = 'https://www.stg.rakuten-bank.co.jp',
+          urlWeb = 'https://www.rakuten-bank.co.jp';
+
+      var getText = function getText() {
+        // 複数行の文字列を配列に変換
+        var arrayPath = $textarea.value.split('\n');
+        return arrayPath;
+      };
+
+      var setComment = function setComment() {
+        var arrayStgPath = [];
+        var arrayWebPath = [];
+        getText().forEach(function (pathItem) {
+          var trim = pathItem.replace('/trunk', '');
+          arrayStgPath.push(urlStg + trim);
+          arrayWebPath.push(urlWeb + trim);
+        });
+        var strStgPath = arrayStgPath.join("\n");
+        var strWebPath = arrayWebPath.join("\n");
+        var strAllPath = "\u304A\u75B2\u308C\u69D8\u3067\u3059\u3002\n    \n\u4EE5\u4E0B\u3001\u914D\u4FE1\u8A2D\u5B9A\u304C\u5B8C\u4E86\u3057\u307E\u3057\u305F\u306E\u3067\u518D\u9451\u306E\u4E0A\u3001\n\u627F\u8A8D\u4F9D\u983C\u3092\u304A\u9858\u3044\u3044\u305F\u3057\u307E\u3059\u3002\n    \n\u25BCstg\n".concat(strStgPath, "\n    \n\u25BCwww\n").concat(strWebPath, "\n    \n").concat(arrayStgPath.length, "\u30D5\u30A1\u30A4\u30EB\n    \n\u25BC\u914D\u4FE1\u8A2D\u5B9A\u3000\u5373\u6642\n    \n\u4EE5\u4E0A\u3001\u3088\u308D\u3057\u304F\u304A\u9858\u3044\u3044\u305F\u3057\u307E\u3059\u3002");
+        return strAllPath;
+      };
+
+      var setText = function setText() {
+        setTimeout(function () {
+          if ($textarea.value.length) {
+            $output.value = setComment();
+          } else {
+            $output.value = '';
+          }
+        }, 0);
+      };
+
+      $textarea.addEventListener('input', setText);
+      $textarea.addEventListener('paste', setText);
+    })();
+  </script>
+  <!-- <script src="./js/main.js"></script> -->
+</body>
+</html>
